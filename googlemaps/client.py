@@ -241,9 +241,6 @@ class Client(object):
         if api_status == "OVER_QUERY_LIMIT":
             raise googlemaps.exceptions._RetriableRequest()
 
-        if api_status == "INVALID REQUEST":
-            raise googlemaps.exceptions._InvalidRequest()
-
         if "error_message" in body:
             raise googlemaps.exceptions.ApiError(api_status,
                     body["error_message"])
@@ -296,10 +293,12 @@ from googlemaps.roads import snap_to_roads
 from googlemaps.roads import speed_limits
 from googlemaps.roads import snapped_speed_limits
 from googlemaps.places import places
+from googlemaps.places import places_nearby
+from googlemaps.places import places_radar
 from googlemaps.places import place
 from googlemaps.places import places_photo
 from googlemaps.places import places_autocomplete
-from googlemaps.places import nearbysearch
+from googlemaps.places import places_autocomplete_query
 
 Client.directions = directions
 Client.distance_matrix = distance_matrix
@@ -312,10 +311,12 @@ Client.snap_to_roads = snap_to_roads
 Client.speed_limits = speed_limits
 Client.snapped_speed_limits = snapped_speed_limits
 Client.places = places
+Client.places_nearby = places_nearby
+Client.places_radar = places_radar
 Client.place = place
 Client.places_photo = places_photo
 Client.places_autocomplete = places_autocomplete
-Client.nearbysearch = nearbysearch
+Client.places_autocomplete_query = places_autocomplete_query
 
 
 def sign_hmac(secret, payload):
